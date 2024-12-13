@@ -159,4 +159,21 @@ public class User {
     public void setAnimal(String animal) {
         this.animal = animal;
     }
+
+    /**
+     * Devuelve una representación en cadena del objeto User
+     * @return Cadena que representa el objeto User con todos sus atributos
+     */
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", password='" + password + '\'' +
+                ", animal='" + animal + '\'' +
+                '}';
+    }
 }

@@ -98,4 +98,18 @@ public class Horoscope {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-}
+
+    /**
+      * Devuelve una representación en cadena del objeto Horoscope
+      * @return cadena que representa el objeto con sus atributos
+      */
+      @Override
+      public String toString() {
+          return "Horoscope{" +
+                  "id=" + id +
+                  ", animal='" + animal + '\'' +
+                  ", startDate=" + startDate +
+                  ", endDate=" + endDate +
+                  '}';
+      }
+ }
