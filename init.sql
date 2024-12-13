@@ -27,7 +27,7 @@ VALUES ('Tigre', '1926-02-13', '1927-02-01');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1927-02-02', '1928-01-22');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '1928-01-23', '1929-02-09');
+VALUES ('Dragon', '1928-01-23', '1929-02-09');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '1929-02-10', '1930-01-29');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -51,7 +51,7 @@ VALUES ('Tigre', '1938-01-31', '1939-02-18');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1939-02-19', '1940-02-07');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '1940-02-08', '1941-01-26');
+VALUES ('Dragon', '1940-02-08', '1941-01-26');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '1941-01-27', '1942-02-14');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -75,7 +75,7 @@ VALUES ('Tigre', '1950-02-17', '1951-02-05');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1951-02-06', '1952-01-26');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '1952-01-27', '1953-02-13');
+VALUES ('Dragon', '1952-01-27', '1953-02-13');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '1953-02-14', '1954-02-02');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -99,7 +99,7 @@ VALUES ('Tigre', '1962-02-05', '1963-01-24');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1963-01-25', '1964-02-12');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '1964-02-13', '1965-02-01');
+VALUES ('Dragon', '1964-02-13', '1965-02-01');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '1965-02-02', '1966-01-20');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -123,7 +123,7 @@ VALUES ('Tigre', '1974-01-23', '1975-02-10');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1975-02-11', '1976-01-30');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '1976-01-31', '1977-02-17');
+VALUES ('Dragon', '1976-01-31', '1977-02-17');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '1977-02-18', '1978-02-06');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -147,7 +147,7 @@ VALUES ('Tigre', '1986-02-09', '1987-01-28');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1987-01-29', '1988-02-16');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '1988-02-17', '1989-02-05');
+VALUES ('Dragon', '1988-02-17', '1989-02-05');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '1989-02-06', '1990-01-26');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -171,7 +171,7 @@ VALUES ('Tigre', '1998-01-28', '1999-02-15');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '1999-02-16', '2000-02-04');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '2000-02-05', '2001-01-23');
+VALUES ('Dragon', '2000-02-05', '2001-01-23');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '2001-01-24', '2002-02-11');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -195,7 +195,7 @@ VALUES ('Tigre', '2010-02-14', '2011-02-02');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '2011-02-03', '2012-01-22');
 INSERT INTO horoscopes (animal, start_date, end_date)
-VALUES ('Dragón', '2012-01-23', '2013-02-09');
+VALUES ('Dragon', '2012-01-23', '2013-02-09');
 INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Serpiente', '2013-02-10', '2014-01-30');
 INSERT INTO horoscopes (animal, start_date, end_date)
@@ -220,15 +220,15 @@ INSERT INTO horoscopes (animal, start_date, end_date)
 VALUES ('Conejo', '2023-01-22', '2024-02-09');
 
 INSERT INTO users (name, username, email, birth_date, password, animal)
-VALUES ('Ana García', 'anag', 'ana.garcia@email.com', '1995-06-15', 'pass123', 'Cerdo');
+VALUES ('Ana Garcia', 'anag', 'ana.garcia@email.com', '1995-06-15', 'pass123', 'Cerdo');
 INSERT INTO users (name, username, email, birth_date, password, animal)
-VALUES ('Carlos Wong', 'carlosw', 'carlos.w@email.com', '1988-07-20', 'pass456', 'Dragón');
+VALUES ('Carlos Wong', 'carlosw', 'carlos.w@email.com', '1988-07-20', 'pass456', 'Dragon');
 INSERT INTO users (name, username, email, birth_date, password, animal)
-VALUES ('María Rodríguez', 'mariar', 'maria.r@email.com', '1991-12-05', 'pass789', 'Cabra');
+VALUES ('Maria Rodriguez', 'mariar', 'maria.r@email.com', '1991-12-05', 'pass789', 'Cabra');
 INSERT INTO users (name, username, email, birth_date, password, animal)
 VALUES ('Juan Chen', 'juanc', 'juan.chen@email.com', '1986-03-15', 'pass321', 'Tigre');
 INSERT INTO users (name, username, email, birth_date, password, animal)
-VALUES ('Laura Kim', 'laurak', 'laura.kim@email.com', '2000-03-10', 'pass654', 'Dragón');
+VALUES ('Laura Kim', 'laurak', 'laura.kim@email.com', '2000-03-10', 'pass654', 'Dragon');
 INSERT INTO users (name, username, email, birth_date, password, animal)
 VALUES ('Pedro Lin', 'pedrol', 'pedro.l@email.com', '1993-05-20', 'pass987', 'Gallo');
 INSERT INTO users (name, username, email, birth_date, password, animal)
