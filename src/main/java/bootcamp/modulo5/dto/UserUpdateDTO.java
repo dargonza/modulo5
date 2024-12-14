@@ -1,17 +1,19 @@
 package bootcamp.modulo5.dto;
 
+import java.time.LocalDate;
+
 public class UserUpdateDTO {
     private int id;
     private String name;
     private String username;
     private String email;
     private String password;
-    private String birthDate;
+    private LocalDate birthDate;
 
     public UserUpdateDTO() {
     }
 
-    public UserUpdateDTO(int id, String name, String username, String email, String password, String birthDate) {
+    public UserUpdateDTO(int id, String name, String username, String email, String password, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -52,11 +54,11 @@ public class UserUpdateDTO {
         this.email = email;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
