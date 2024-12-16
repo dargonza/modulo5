@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User saveUser(User user) {
+    public boolean saveUser(User user) {
         String query = "INSERT INTO users (name, username, email, birth_date, password, animal) " +
                 "   VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -39,9 +39,11 @@ public class UserRepositoryImpl implements UserRepository {
                 user.setId(generatedKeys.getInt(1));
             }
 
-            return user;
+            return true;
         } catch (Exception e) {
-            throw new RuntimeException("Error saving user", e);
+            //throw new RuntimeException("Error al guardar el usuario: ", e);
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -179,7 +181,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User updateUser(User user) {
-        String query = "UPDATE users SET name = ?, username = ?, email = ?, birth_date = ?, password = ?, animal = ? WHERE id = ?";
+        String query = "UPDATE users " +
+                "SET name = ?, username = ?, email = ?, birth_date = ?, password = ?, animal = ? " +
+                "WHERE id = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -221,15 +225,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User login(String username, String password) {
-        String query = "SELECT id, name, username, email, birthDate, password, animal " +
+        String query = "SELECT id, name, username, email, birth_date, password, animal " +
                 "FROM users " +
                 "WHERE username = ? AND password = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
+
             stmt.setString(1, username);
             stmt.setString(2, password);
+
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -239,9 +245,8 @@ public class UserRepositoryImpl implements UserRepository {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
-                user.setBirthDate(rs.getObject("birthDate", LocalDate.class));
+                user.setBirthDate(rs.getObject("birth_date", LocalDate.class));
                 user.setAnimal(rs.getString("animal"));
-
                 return user;
             }
         } catch (Exception e) {

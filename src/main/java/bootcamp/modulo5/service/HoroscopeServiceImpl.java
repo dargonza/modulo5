@@ -21,6 +21,7 @@ public class HoroscopeServiceImpl implements HoroscopeService {
         List<Horoscope> chineseZodiacSigns = horoscopeRepository.findAll();
         Horoscope matchedZodiacSign = null;
 
+
         for (Horoscope zodiacSign : chineseZodiacSigns) {
             if (birthDate.isAfter(zodiacSign.getStartDate()) && birthDate.isBefore(zodiacSign.getEndDate())) {
                 matchedZodiacSign = zodiacSign;

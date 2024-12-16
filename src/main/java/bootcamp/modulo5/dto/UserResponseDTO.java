@@ -70,4 +70,16 @@ public class UserResponseDTO {
     public void setAnimal(String animal) {
         this.animal = animal;
     }
+
+    @Override
+    public String toString() {
+        return "UserResponseDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", animal='" + animal + '\'' +
+                '}';
+    }
 }

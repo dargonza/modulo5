@@ -27,7 +27,7 @@ public class HoroscopeRepositoryImpl implements HoroscopeRepository {
     @Override
     public List<Horoscope> findAll() {
         String query = "SELECT id, animal, start_date, end_date " +
-                       "FROM horoscope";
+                       "FROM horoscopes";
 
         List<Horoscope> horoscopes = new ArrayList<>();
 

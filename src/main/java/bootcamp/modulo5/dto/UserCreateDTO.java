@@ -8,16 +8,18 @@ public class UserCreateDTO {
     private String email;
     private String password;
     private LocalDate birthDate;
+    private String animal;
 
     public UserCreateDTO() {
     }
 
-    public UserCreateDTO(String name, String username, String email, String password, LocalDate birthDate) {
+    public UserCreateDTO(String name, String username, String email, String password, LocalDate birthDate, String animal) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
+        this.animal = animal;
     }
 
     public String getName() {
@@ -58,5 +60,25 @@ public class UserCreateDTO {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    @Override
+    public String toString() {
+        return "UserCreateDTO{" +
+                "name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", birthDate=" + birthDate +
+                ", animal='" + animal + '\'' +
+                '}';
     }
 }

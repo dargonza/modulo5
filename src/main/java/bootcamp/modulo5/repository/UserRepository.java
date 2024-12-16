@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserRepository {
 
     // Create
-    User saveUser(User user);
+    boolean saveUser(User user);
 
     // Read
     List<User> findAllUsers();

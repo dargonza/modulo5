@@ -15,6 +15,7 @@ public class UserMapper {
         user.setEmail(createDTO.getEmail());
         user.setBirthDate(createDTO.getBirthDate());
         user.setPassword(createDTO.getPassword());
+        user.setAnimal(createDTO.getAnimal());
         return user;
     }
 

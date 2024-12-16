@@ -69,4 +69,16 @@ public class UserUpdateDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "UserUpdateDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }

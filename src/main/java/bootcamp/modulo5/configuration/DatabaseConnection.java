@@ -17,6 +17,7 @@ public class DatabaseConnection {
     private static final String USER = "root";
     private static final String PASSWORD = "root";
 
+
     // Instancia única de la clase (patrón Singleton)
     private static DatabaseConnection instance;
     private Connection connection;

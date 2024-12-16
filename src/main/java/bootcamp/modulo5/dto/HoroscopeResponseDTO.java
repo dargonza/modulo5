@@ -39,4 +39,13 @@ public class HoroscopeResponseDTO {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public String toString() {
+        return "HoroscopeResponseDTO{" +
+                "animal='" + animal + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }
