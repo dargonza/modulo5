@@ -1,21 +1,22 @@
 package bootcamp.modulo5.model;
 
 import java.time.LocalDate;
- /**
- * Clase que representa un horóscopo con su animal y fechas correspondientes
+
+/**
+ * Clase que representa un horóscopo del zodiaco chino
+ * Contiene información sobre el animal, y el período de fechas correspondiente
  */
 public class Horoscope {
-    /** Identificador único del horóscopo */
-    private int id;
-    /** Animal del horóscopo */
-    private String animal;
-    /** Fecha de inicio del período del horóscopo */
-    private LocalDate startDate;
-    /** Fecha de fin del período del horóscopo */
-    private LocalDate endDate;
+
+    // Atributos de la clase
+    private int id;                // Identificador único del horóscopo
+    private String animal;         // Animal del horóscopo chino
+    private LocalDate startDate;   // Fecha de inicio del período
+    private LocalDate endDate;     // Fecha de fin del período
 
     /**
      * Constructor por defecto
+     * Inicializa un objeto Horoscope sin parámetros
      */
     public Horoscope() {
     }
@@ -23,7 +24,7 @@ public class Horoscope {
     /**
      * Constructor con todos los parámetros
      * @param id Identificador único del horóscopo
-     * @param animal Animal del horóscopo
+     * @param animal Animal del horóscopo chino
      * @param startDate Fecha de inicio del período
      * @param endDate Fecha de fin del período
      */
@@ -34,10 +35,10 @@ public class Horoscope {
         this.endDate = endDate;
     }
 
-    // Getters and Setters
+    // Métodos getters y setters
     /**
      * Obtiene el ID del horóscopo
-     * @return id del horóscopo
+     * @return Identificador único del horóscopo
      */
     public int getId() {
         return id;
@@ -45,7 +46,7 @@ public class Horoscope {
 
     /**
      * Establece el ID del horóscopo
-     * @param id nuevo id a establecer
+     * @param id Nuevo identificador único a establecer
      */
     public void setId(int id) {
         this.id = id;
@@ -53,7 +54,7 @@ public class Horoscope {
 
     /**
      * Obtiene el animal del horóscopo
-     * @return animal del horóscopo
+     * @return Nombre del animal del horóscopo chino
      */
     public String getAnimal() {
         return animal;
@@ -61,7 +62,7 @@ public class Horoscope {
 
     /**
      * Establece el animal del horóscopo
-     * @param animal nuevo animal a establecer
+     * @param animal Nuevo nombre del animal a establecer
      */
     public void setAnimal(String animal) {
         this.animal = animal;
@@ -69,7 +70,7 @@ public class Horoscope {
 
     /**
      * Obtiene la fecha de inicio del período
-     * @return fecha de inicio
+     * @return Fecha que marca el inicio del período del horóscopo
      */
     public LocalDate getStartDate() {
         return startDate;
@@ -77,7 +78,7 @@ public class Horoscope {
 
     /**
      * Establece la fecha de inicio del período
-     * @param startDate nueva fecha de inicio
+     * @param startDate Nueva fecha de inicio a establecer
      */
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
@@ -85,7 +86,7 @@ public class Horoscope {
 
     /**
      * Obtiene la fecha de fin del período
-     * @return fecha de fin
+     * @return Fecha que marca el fin del período del horóscopo
      */
     public LocalDate getEndDate() {
         return endDate;
@@ -93,23 +94,23 @@ public class Horoscope {
 
     /**
      * Establece la fecha de fin del período
-     * @param endDate nueva fecha de fin
+     * @param endDate Nueva fecha de fin a establecer
      */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
     /**
-      * Devuelve una representación en cadena del objeto Horoscope
-      * @return cadena que representa el objeto con sus atributos
-      */
-      @Override
-      public String toString() {
-          return "Horoscope{" +
-                  "id=" + id +
-                  ", animal='" + animal + '\'' +
-                  ", startDate=" + startDate +
-                  ", endDate=" + endDate +
-                  '}';
-      }
- }
+     * Genera una representación en formato String del objeto Horoscope
+     * @return Cadena que contiene todos los atributos del horóscopo formateados
+     */
+    @Override
+    public String toString() {
+        return "Horoscope{" +
+                "id=" + id +
+                ", animal='" + animal + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
+}

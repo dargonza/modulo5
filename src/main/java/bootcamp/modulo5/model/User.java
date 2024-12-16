@@ -4,37 +4,34 @@ import java.time.LocalDate;
 
 /**
  * Clase que representa un usuario en el sistema.
+ * Esta clase contiene toda la información personal y credenciales de un usuario.
  */
 public class User {
-    /** ID único del usuario */
-    private int id;
-    /** Nombre completo del usuario */
-    private String name;
-    /** Nombre de usuario para el login */
-    private String username;
-    /** Correo electrónico del usuario */
-    private String email;
-    /** Fecha de nacimiento del usuario */
-    private LocalDate birthDate;
-    /** Contraseña del usuario */
-    private String password;
-    /** Animal favorito del usuario */
-    private String animal;
+    // Atributos principales del usuario
+    private int id;                 // Identificador único
+    private String name;            // Nombre completo
+    private String username;        // Nombre de usuario para login
+    private String email;           // Correo electrónico
+    private LocalDate birthDate;    // Fecha de nacimiento
+    private String password;        // Contraseña
+    private String animal;          // Animal favorito
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
+     * Inicializa un nuevo usuario sin datos.
      */
     public User() {
     }
 
     /**
-     * Constructor con todos los campos
-     * @param id ID único del usuario
+     * Constructor completo que inicializa todos los atributos del usuario.
+     *
+     * @param id Identificador único del usuario
      * @param name Nombre completo del usuario
-     * @param username Nombre de usuario para el login
-     * @param email Correo electrónico del usuario
-     * @param birthDate Fecha de nacimiento del usuario
-     * @param password Contraseña del usuario
+     * @param username Nombre de usuario para el sistema
+     * @param email Dirección de correo electrónico
+     * @param birthDate Fecha de nacimiento
+     * @param password Contraseña de acceso
      * @param animal Animal favorito del usuario
      */
     public User(int id, String name, String username, String email, LocalDate birthDate, String password, String animal) {
@@ -47,105 +44,106 @@ public class User {
         this.animal = animal;
     }
 
-    // Getters and Setters
+    // Métodos de acceso (Getters y Setters)
+
     /**
-     * Obtiene el ID del usuario
-     * @return ID del usuario
+     * Obtiene el identificador único del usuario.
+     * @return Identificador del usuario
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Establece el ID del usuario
-     * @param id ID a establecer
+     * Establece el identificador único del usuario.
+     * @param id Nuevo identificador a asignar
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Obtiene el nombre del usuario
-     * @return Nombre del usuario
+     * Obtiene el nombre completo del usuario.
+     * @return Nombre completo del usuario
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Establece el nombre del usuario
-     * @param name Nombre a establecer
+     * Establece el nombre completo del usuario.
+     * @param name Nuevo nombre a asignar
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Obtiene el nombre de usuario
-     * @return Nombre de usuario
+     * Obtiene el nombre de usuario del sistema.
+     * @return Nombre de usuario para login
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Establece el nombre de usuario
-     * @param username Nombre de usuario a establecer
+     * Establece el nombre de usuario del sistema.
+     * @param username Nuevo nombre de usuario a asignar
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
-     * Obtiene el email del usuario
-     * @return Email del usuario
+     * Obtiene el correo electrónico del usuario.
+     * @return Dirección de correo electrónico
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Establece el email del usuario
-     * @param email Email a establecer
+     * Establece el correo electrónico del usuario.
+     * @param email Nueva dirección de correo a asignar
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Obtiene la fecha de nacimiento del usuario
-     * @return Fecha de nacimiento del usuario
+     * Obtiene la fecha de nacimiento del usuario.
+     * @return Fecha de nacimiento
      */
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
     /**
-     * Establece la fecha de nacimiento del usuario
-     * @param birthDate Fecha de nacimiento a establecer
+     * Establece la fecha de nacimiento del usuario.
+     * @param birthDate Nueva fecha de nacimiento a asignar
      */
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
     /**
-     * Obtiene la contraseña del usuario
-     * @return Contraseña del usuario
+     * Obtiene la contraseña del usuario.
+     * @return Contraseña actual del usuario
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * Establece la contraseña del usuario
-     * @param password Contraseña a establecer
+     * Establece la contraseña del usuario.
+     * @param password Nueva contraseña a asignar
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * Obtiene el animal favorito del usuario
+     * Obtiene el animal favorito del usuario.
      * @return Animal favorito del usuario
      */
     public String getAnimal() {
@@ -153,16 +151,18 @@ public class User {
     }
 
     /**
-     * Establece el animal favorito del usuario
-     * @param animal Animal favorito a establecer
+     * Establece el animal favorito del usuario.
+     * @param animal Nuevo animal favorito a asignar
      */
     public void setAnimal(String animal) {
         this.animal = animal;
     }
 
     /**
-     * Devuelve una representación en cadena del objeto User
-     * @return Cadena que representa el objeto User con todos sus atributos
+     * Genera una representación en formato String de todos los datos del usuario.
+     * Este método es útil para depuración y registro.
+     *
+     * @return Cadena con todos los atributos del usuario
      */
     @Override
     public String toString() {
