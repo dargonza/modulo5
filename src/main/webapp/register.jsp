@@ -14,6 +14,18 @@
                     <h4 class="mb-0">Registrar Nuevo Usuario</h4>
                 </div>
                 <div class="card-body">
+                    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+                    <% if (errorMessage != null) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <%= errorMessage %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <script>
+                        setTimeout(function () {
+                            document.querySelector('.alert-danger').remove();
+                        }, 2000);
+                    </script>
+                    <% } %>
                     <div id="alertSuccess" class="alert alert-success alert-dismissible fade d-none" role="alert">
                         ¡Usuario registrado exitosamente!
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -54,18 +66,6 @@
                             <button type="submit" class="btn btn-info text-light">Registrar</button>
                         </div>
                     </form>
-                    <!-- Mostrar errores -->
-                    <% if (request.getParameter("error") != null && request.getParameter("error").equals("success")) { %>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <%= request.getAttribute("error") %>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <script>
-                        setTimeout(function () {
-                            document.querySelector('.alert-danger').remove();
-                        }, 2000);
-                    </script>
-                    <% } %>
                 </div>
             </div>
         </div>
@@ -86,4 +86,5 @@
     }
 </script>
 </body>
-</html></html>
+</html>
+</html>

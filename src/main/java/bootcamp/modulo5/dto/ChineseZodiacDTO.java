@@ -88,4 +88,4 @@ public class ChineseZodiacDTO {
                 ", animal='" + animal + '\'' +
                 '}';
     }
-}}}
+}

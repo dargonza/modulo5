@@ -15,23 +15,27 @@
     <div class="row justify-content-center align-items-center">
 
         <div class="col-md-6">
-            <% if (request.getParameter("success") != null && request.getParameter("success").equals("update-success")) { %>
+            <%-- Display success message --%>
+            <% if (request.getAttribute("successMessage") != null) { %>
             <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
-                ¡Perfil actualizado exitosamente!
+                <%= request.getAttribute("successMessage") %>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <% } %>
 
-            <% if (request.getParameter("error") != null && request.getParameter("error").equals("update-failed")) { %>
+            <%-- Display error message --%>
+            <% if (request.getAttribute("errorMessage") != null) { %>
             <div class="alert alert-danger alert-dismissible fade show" role="alert" id="errorAlert">
-                Hubo un error al actualizar el perfil. Por favor, intente nuevamente.
+                <%= request.getAttribute("errorMessage") %>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <% } %>
+
+
             <div class="card">
                 <div class="card-header text-center">
                     <h4 class="mb-0">Actualizar Perfil</h4>

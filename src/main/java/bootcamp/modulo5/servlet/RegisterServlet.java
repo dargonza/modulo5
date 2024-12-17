@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Enumeration;
+
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -35,84 +35,35 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String name = request.getParameter("name");
-
-        if (name == null || name.trim().isEmpty() || name.trim().length() < 2) {
-
-            request.setAttribute("error", "El nombre debe tener al menos 2 caracteres");
-            request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-            return;
-        }
-
         String username = request.getParameter("username");
-
-        if (username == null || username.trim().isEmpty() || username.trim().length() < 2) {
-            request.setAttribute("error", "El nombre de usuario debe tener al menos 2 caracteres");
-            request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-            return;
-        }
-
         String email = request.getParameter("email");
-
-        if (email == null || email.trim().isEmpty() || !email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
-            request.setAttribute("error", "El email es inválido");
-            request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-            return;
-        }
-
         String password = request.getParameter("password");
-
-        if (password == null || password.length() < 6) {
-
-            request.setAttribute("error", "La contraseña debe tener al menos 6 caracteres");
-            request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-            return;
-        }
-
-        LocalDate birthDate;
-        String animalSign;
-        try {
-            birthDate = LocalDate.parse(request.getParameter("birthDate"));
-
-            if (birthDate.isAfter(LocalDate.now())) {
-
-                request.setAttribute("error", "La fecha de nacimiento no puede ser futura");
-                request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-                return;
-            }
-
-            animalSign = horoscopeService.getChineseZodiacAnimal(birthDate);
-
-            if (animalSign == null || animalSign.trim().isEmpty()) {
-
-                request.setAttribute("error", "Error al obtener el signo del zodiaco chino");
-                request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-                return;
-            }
-        } catch (Exception e) {
-
-            request.setAttribute("error", "Formato de fecha inválido");
-            request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
-            return;
-        }
-
-        UserCreateDTO userCreate = new UserCreateDTO(name, username, email, password, birthDate, animalSign);
-
+        String birthDateStr = request.getParameter("birthDate");
 
         try {
-            if (userService.registerUser(userCreate)) {
+            LocalDate birthDate = LocalDate.parse(birthDateStr);
+            UserCreateDTO userCreate = new UserCreateDTO(name, username, email, password, birthDate, "");
 
-                request.setAttribute("success", "Usuario registrado exitosamente");
+            boolean isRegistered = userService.registerUser(userCreate);
+
+            if (isRegistered) {
+                request.setAttribute("successMessage", "Usuario registrado exitosamente");
                 response.sendRedirect("login.jsp?register=success");
             } else {
-
-                request.setAttribute("error", "Error al registrar usuario_");
+                request.setAttribute("errorMessage", "Error al registrar usuario");
                 request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
             }
-        } catch (Exception e) {
 
-            request.setAttribute("error", "Error al registrar usuario");
+        } catch (IllegalArgumentException e) {
+            // Captura errores específicos de validación
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
+        } catch (Exception e) {
+            // Captura otros errores
+            request.setAttribute("errorMessage", "Ocurrió un error inesperado");
             request.getRequestDispatcher("register.jsp?error=true").forward(request, response);
         }
+
     }
 
 

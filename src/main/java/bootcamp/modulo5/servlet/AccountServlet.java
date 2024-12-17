@@ -29,47 +29,70 @@ public class AccountServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         request.getRequestDispatcher("user-account.jsp").forward(request, response);
+        //response.sendRedirect("user-account.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String pathInfo = request.getPathInfo();
 
-
         if ("/update-profile".equals(pathInfo)) {
-
             HttpSession session = request.getSession();
             UserResponseDTO loggedUser = (UserResponseDTO) session.getAttribute("loggedUser");
             if (loggedUser == null) {
-                response.sendRedirect("user-account.jsp?error=not-logged");
+                request.setAttribute("errorMessage", "Usuario no autenticado");
+                request.getRequestDispatcher("/user-account.jsp").forward(request, response);
                 return;
             }
 
-            String name = request.getParameter("name");
-            String username = request.getParameter("username");
-            String email = request.getParameter("email");
-            LocalDate birthDate = LocalDate.parse(request.getParameter("birth_date"));
-            String password = request.getParameter("password");
+            try {
+                // Obtener parámetros del formulario
+                String name = request.getParameter("name");
+                String username = request.getParameter("username");
+                String email = request.getParameter("email");
+                String birthDateStr = request.getParameter("birth_date");
+                String password = request.getParameter("password");
 
+                // Validar campos obligatorios
+                if (isNullOrEmpty(name) || isNullOrEmpty(username) || isNullOrEmpty(email) || isNullOrEmpty(birthDateStr)) {
+                    request.setAttribute("errorMessage", "Todos los campos obligatorios deben completarse.");
+                    request.getRequestDispatcher("/user-account.jsp").forward(request, response);
+                    return;
+                }
 
-            UserUpdateDTO updatedUser = new UserUpdateDTO(loggedUser.getId(), name, username, email, password, birthDate);
+                // Convertir fecha de nacimiento
+                LocalDate birthDate;
+                try {
+                    birthDate = LocalDate.parse(birthDateStr);
+                } catch (Exception e) {
+                    request.setAttribute("errorMessage", "La fecha de nacimiento no tiene un formato válido.");
+                    request.getRequestDispatcher("/user-account.jsp").forward(request, response);
+                    return;
+                }
 
-            UserResponseDTO updatedUserResponse = userService.updateUser(updatedUser);
+                // Crear DTO de actualización de usuario
+                UserUpdateDTO updatedUser = new UserUpdateDTO(loggedUser.getId(), name, username, email, password, birthDate);
 
-            String route = "/account";
-            if (updatedUserResponse != null) {
-                route = route + "?success=update-success";
-                session.setAttribute("loggedUser", updatedUserResponse);
+                // Llamar al servicio para actualizar el usuario
+                UserResponseDTO updatedUserResponse = userService.updateUser(updatedUser);
+
+                // Redirigir con éxito si la actualización se realizó
+                if (updatedUserResponse != null) {
+                    session.setAttribute("loggedUser", updatedUserResponse);
+                    request.setAttribute("successMessage", "Perfil actualizado exitosamente");
+                    request.getRequestDispatcher("/user-account.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("errorMessage", "No se pudo actualizar el perfil");
+                    request.getRequestDispatcher("/user-account.jsp").forward(request, response);
+                }
             }
-            else {
-                session.setAttribute("loggedUser", loggedUser);
-                route = route + "?error=update-failed";
+            catch (Exception e) {
+                // Manejar la excepción y redirigir con un mensaje de error
+                System.out.println("Error al actualizar el perfil: " + e.getMessage());
+                request.setAttribute("errorMessage", e.getMessage());
+                request.getRequestDispatcher("/user-account.jsp").forward(request, response);
             }
-
-            response.sendRedirect(request.getContextPath() + route);
         }
-        else if ("/delete-account".equals(pathInfo)) {
-
+        else if ("/delete-account".equals(pathInfo)) { // Manejar la solicitud de eliminación de cuenta
             HttpSession session = request.getSession(false);
             UserResponseDTO loggedUser = (UserResponseDTO) session.getAttribute("loggedUser");
             if (loggedUser == null) {
@@ -87,5 +110,10 @@ public class AccountServlet extends HttpServlet {
 
             response.sendRedirect(request.getContextPath() + "/login");
         }
+    }
+
+    // Método utilitario para validar cadenas nulas o vacías
+    private boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
     }
 }
