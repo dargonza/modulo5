@@ -10,21 +10,33 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación del repositorio de usuarios que maneja las operaciones CRUD en la base de datos.
+ */
 public class UserRepositoryImpl implements UserRepository {
     private final DatabaseConnection databaseConnection;
 
+    /**
+     * Constructor que inicializa la conexión a la base de datos.
+     */
     public UserRepositoryImpl() {
         this.databaseConnection = DatabaseConnection.getInstance();
     }
 
+    /**
+     * Guarda un nuevo usuario en la base de datos.
+     * @param user Usuario a guardar
+     * @return true si el usuario fue guardado exitosamente, false en caso contrario
+     */
     @Override
     public boolean saveUser(User user) {
-        String query = "INSERT INTO users (name, username, email, birth_date, password, animal) " +
-                "   VALUES (?, ?, ?, ?, ?, ?)";
+        // Query SQL para insertar un nuevo usuario
+        String query = "INSERT INTO users (name, username, email, birth_date, password, animal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
+            // Establecer los parámetros del usuario
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getEmail());
@@ -34,6 +46,7 @@ public class UserRepositoryImpl implements UserRepository {
 
             stmt.executeUpdate();
 
+            // Obtener el ID generado automáticamente
             ResultSet generatedKeys = stmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 user.setId(generatedKeys.getInt(1));
@@ -41,12 +54,15 @@ public class UserRepositoryImpl implements UserRepository {
 
             return true;
         } catch (Exception e) {
-            //throw new RuntimeException("Error al guardar el usuario: ", e);
             e.printStackTrace();
             return false;
         }
     }
 
+    /**
+     * Recupera todos los usuarios de la base de datos.
+     * @return Lista de todos los usuarios
+     */
     @Override
     public List<User> findAllUsers() {
         String query = "SELECT id, name, username, email, birth_date, password, animal FROM users";
@@ -56,6 +72,7 @@ public class UserRepositoryImpl implements UserRepository {
              PreparedStatement stmt = connection.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
+            // Iterar sobre los resultados y crear objetos User
             while (rs.next()) {
                 users.add(new User(
                         rs.getInt("id"),
@@ -69,15 +86,18 @@ public class UserRepositoryImpl implements UserRepository {
             }
             return users;
         } catch (Exception e) {
-            throw new RuntimeException("Error finding all users", e);
+            throw new RuntimeException("Error al buscar todos los usuarios", e);
         }
     }
 
+    /**
+     * Busca un usuario por su nombre de usuario.
+     * @param username Nombre de usuario a buscar
+     * @return Usuario encontrado o null si no existe
+     */
     @Override
     public User findUserByUsername(String username) {
-        String query = "SELECT id, name, username, email, birthDate, password, animal " +
-                "FROM users " +
-                "WHERE username = ?";
+        String query = "SELECT id, name, username, email, birth_date, password, animal FROM users WHERE username = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -97,16 +117,19 @@ public class UserRepositoryImpl implements UserRepository {
                 );
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error finding user by username", e);
+            throw new RuntimeException("Error al buscar usuario por nombre de usuario", e);
         }
         return null;
     }
 
+    /**
+     * Busca un usuario por su ID.
+     * @param id ID del usuario a buscar
+     * @return Usuario encontrado o null si no existe
+     */
     @Override
     public User findUserById(int id) {
-        String query = "SELECT id, name, username, email, birth_date, password, animal " +
-                "FROM users " +
-                "WHERE id = ?";
+        String query = "SELECT id, name, username, email, birth_date, password, animal FROM users WHERE id = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -126,22 +149,30 @@ public class UserRepositoryImpl implements UserRepository {
                 );
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error finding user by id", e);
+            throw new RuntimeException("Error al buscar usuario por ID", e);
         }
         return null;
     }
 
+    /**
+     * Método para obtener el horóscopo de un usuario.
+     * @param userId ID del usuario
+     * @return Usuario con información de horóscopo
+     */
     @Override
     public User findUserHoroscope(int userId) {
-        // TODO: Implement the logic to fetch the user's horoscope
+        // TODO: Implementar la lógica para obtener el horóscopo del usuario
         return null;
     }
 
+    /**
+     * Verifica si existe un usuario con el nombre de usuario especificado.
+     * @param username Nombre de usuario a verificar
+     * @return true si existe, false en caso contrario
+     */
     @Override
     public boolean existsByUsername(String username) {
-        String query = "SELECT COUNT(*) " +
-                "FROM users " +
-                "WHERE username = ?";
+        String query = "SELECT COUNT(*) FROM users WHERE username = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -153,16 +184,19 @@ public class UserRepositoryImpl implements UserRepository {
                 return rs.getInt(1) > 0;
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error checking username existence", e);
+            throw new RuntimeException("Error al verificar existencia de nombre de usuario", e);
         }
         return false;
     }
 
+    /**
+     * Verifica si existe un usuario con el email especificado.
+     * @param email Email a verificar
+     * @return true si existe, false en caso contrario
+     */
     @Override
     public boolean existsByEmail(String email) {
-        String query = "SELECT COUNT(*) " +
-                "FROM users " +
-                "WHERE email = ?";
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -174,20 +208,24 @@ public class UserRepositoryImpl implements UserRepository {
                 return rs.getInt(1) > 0;
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error checking email existence", e);
+            throw new RuntimeException("Error al verificar existencia de email", e);
         }
         return false;
     }
 
+    /**
+     * Actualiza la información de un usuario existente.
+     * @param user Usuario con la información actualizada
+     * @return Usuario actualizado o null si la actualización falló
+     */
     @Override
     public User updateUser(User user) {
-        String query = "UPDATE users " +
-                "SET name = ?, username = ?, email = ?, birth_date = ?, password = ?, animal = ? " +
-                "WHERE id = ?";
+        String query = "UPDATE users SET name = ?, username = ?, email = ?, birth_date = ?, password = ?, animal = ? WHERE id = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
+            // Establecer los parámetros actualizados
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getEmail());
@@ -200,38 +238,43 @@ public class UserRepositoryImpl implements UserRepository {
                 return user;
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error updating user", e);
+            throw new RuntimeException("Error al actualizar usuario", e);
         }
         return null;
     }
 
+    /**
+     * Elimina un usuario por su ID.
+     * @param userId ID del usuario a eliminar
+     * @return true si el usuario fue eliminado exitosamente, false en caso contrario
+     */
     @Override
     public boolean deleteUser(int userId) {
-        String query = "DELETE FROM users " +
-                "WHERE id = ? ";
-
+        String query = "DELETE FROM users WHERE id = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
             stmt.setInt(1, userId);
-
             return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
-            throw new RuntimeException("Error deleting user", e);
+            throw new RuntimeException("Error al eliminar usuario", e);
         }
     }
 
+    /**
+     * Realiza el proceso de login verificando las credenciales del usuario.
+     * @param username Nombre de usuario
+     * @param password Contraseña
+     * @return Usuario autenticado o null si las credenciales son inválidas
+     */
     @Override
     public User login(String username, String password) {
-        String query = "SELECT id, name, username, email, birth_date, password, animal " +
-                "FROM users " +
-                "WHERE username = ? AND password = ?";
+        String query = "SELECT id, name, username, email, birth_date, password, animal FROM users WHERE username = ? AND password = ?";
 
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query)) {
-
 
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -239,6 +282,7 @@ public class UserRepositoryImpl implements UserRepository {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+                // Crear y poblar el objeto User con los datos del resultado
                 User user = new User();
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
@@ -250,7 +294,7 @@ public class UserRepositoryImpl implements UserRepository {
                 return user;
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error during login", e);
+            throw new RuntimeException("Error durante el proceso de login", e);
         }
         return null;
     }
