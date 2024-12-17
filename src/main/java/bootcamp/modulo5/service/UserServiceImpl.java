@@ -85,11 +85,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public UserResponseDTO getUserByUsername(String username) {
-        // Todo: Implementar el método para obtener un usuario por su nombre de usuario
-        return null;
-    }
+
 
     @Override
     public UserResponseDTO updateUser(UserUpdateDTO userUpdateDTO) {

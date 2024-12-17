@@ -37,12 +37,6 @@ public interface UserRepository {
      */
     User findUserById(int id);
 
-    /**
-     * Obtiene el horóscopo de un usuario específico
-     * @param userId ID del usuario
-     * @return Usuario con información de su horóscopo
-     */
-    User findUserHoroscope(int userId);
 
     /**
      * Verifica si existe un usuario con el nombre de usuario especificado

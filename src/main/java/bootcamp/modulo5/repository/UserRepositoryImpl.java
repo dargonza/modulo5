@@ -154,16 +154,7 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
-    /**
-     * Método para obtener el horóscopo de un usuario.
-     * @param userId ID del usuario
-     * @return Usuario con información de horóscopo
-     */
-    @Override
-    public User findUserHoroscope(int userId) {
-        // TODO: Implementar la lógica para obtener el horóscopo del usuario
-        return null;
-    }
+
 
     /**
      * Verifica si existe un usuario con el nombre de usuario especificado.

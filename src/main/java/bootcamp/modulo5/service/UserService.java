@@ -13,13 +13,6 @@ import java.util.List;
 public interface UserService {
     // ========== Operaciones CRUD de Usuario ==========
     /**
-     * Busca un usuario por su nombre de usuario.
-     * @param username nombre de usuario a buscar
-     * @return DTO con la información del usuario encontrado
-     */
-    UserResponseDTO getUserByUsername(String username);
-
-    /**
      * Busca un usuario por su ID.
      * @param userId ID del usuario a buscar
      * @return DTO con la información del usuario encontrado
